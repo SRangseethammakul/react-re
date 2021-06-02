@@ -1,6 +1,7 @@
 import React from "react";
+import Title from "../style/title/Title";
 import Logo from "./Logo";
-
+import {Button} from "../style/button/Button"
 const Header = () => {
   let companyName = "Suttipong";
   const companyAddress = <p>Bangkok, Thailand</p>;
@@ -18,6 +19,7 @@ const Header = () => {
   ];
   return (
     <>
+      <Title>Hello Re React</Title>
       <h1>Header {companyName}</h1>
       {companyAddress}
       {num + 10}
@@ -31,18 +33,14 @@ const Header = () => {
       )}
       {isLogin ? <Logo /> : "No Content"}
       <br />
-      <button onClick={showMe}>Click ME</button>
+      {/* <button onClick={showMe}>Click ME</button> */}
+      <Button primary onClick={showMe}>From Button</Button>
+      <Button onClick={showMe}>From Button</Button>
       <br />
       <ul>
-          {
-              products.map((product, index) => {
-                  return (
-                      <li key={product.id}>
-                          {product.name}
-                      </li>
-                  );
-              })
-          }
+        {products.map((product, index) => {
+          return <li key={product.id}>{product.name}</li>;
+        })}
       </ul>
       <hr />
     </>
