@@ -6,9 +6,16 @@ const Header = () => {
   const companyAddress = <p>Bangkok, Thailand</p>;
   let num = 10;
   const isLogin = false;
+  const showMe = () => {
+    alert("From Show Me");
+  };
   const showMessage = () => {
     return companyName + ".info";
   };
+  const products = [
+    { id: 1, name: "act" },
+    { id: 2, name: "acts" },
+  ];
   return (
     <>
       <h1>Header {companyName}</h1>
@@ -23,6 +30,20 @@ const Header = () => {
         </>
       )}
       {isLogin ? <Logo /> : "No Content"}
+      <br />
+      <button onClick={showMe}>Click ME</button>
+      <br />
+      <ul>
+          {
+              products.map((product, index) => {
+                  return (
+                      <li key={product.id}>
+                          {product.name}
+                      </li>
+                  );
+              })
+          }
+      </ul>
       <hr />
     </>
   );

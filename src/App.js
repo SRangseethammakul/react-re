@@ -7,7 +7,7 @@ function App() {
     <div>
       <Logo />
       <Header />
-      <Footer />
+      <Footer title='act' code={1111} website='suttipongact.info' isOpen={false} />
     </div>
   );
 }
