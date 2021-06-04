@@ -15,12 +15,7 @@ const HomePage = () => {
                 three supporting pieces of content. Use it as a starting point
                 to create something more unique.
               </p>
-              <p>
-                <BsBarChartFill color='red' size='2em'/>
-                <a className="btn btn-primary btn-lg" href="#" role="button">
-                  Learn more »
-                </a>
-              </p>
+              <BsBarChartFill color='red' size='2em'/>
             </div>
           </div>
           <div className="container">
@@ -35,11 +30,6 @@ const HomePage = () => {
                   Heaven is jealous of our love, angels are crying from up
                   above. Yeah, you take me to utopia.
                 </p>
-                <p>
-                  <a className="btn btn-secondary" href="#" role="button">
-                    View details »
-                  </a>
-                </p>
               </div>
               <div className="col-md-4">
                 <h2>Heading</h2>
@@ -51,11 +41,6 @@ const HomePage = () => {
                   me I was alright but things were kinda heavy. Heavy is the
                   head that wears the crown.
                 </p>
-                <p>
-                  <a className="btn btn-secondary" href="#" role="button">
-                    View details »
-                  </a>
-                </p>
               </div>
               <div className="col-md-4">
                 <h2>Heading</h2>
@@ -65,11 +50,6 @@ const HomePage = () => {
                   break her heart. But down to earth. It's time to face the
                   music I'm no longer your muse. I guess that I forgot I had a
                   choice.
-                </p>
-                <p>
-                  <a className="btn btn-secondary" href="#" role="button">
-                    View details »
-                  </a>
                 </p>
               </div>
             </div>
