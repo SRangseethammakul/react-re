@@ -38,8 +38,11 @@ const NavBer = () => {
             <NavLink to="/" exact className="nav-link" activeClassName="active">
               Home
             </NavLink>
-            <NavLink to="/about" exact className="nav-link" activeClassName="active">
+            <NavLink to="/about" className="nav-link" activeClassName="active">
               About
+            </NavLink>
+            <NavLink to="/product" className="nav-link" activeClassName="active">
+              Product
             </NavLink>
             <NavDropdown title="Dropdown" id="basic-nav-dropdown">
               <NavDropdown.Item>Action</NavDropdown.Item>

@@ -4,6 +4,8 @@ import Footer from "./components/Footer";
 import NavBer from "./components/NavBer";
 import AboutPage from "./pages/AboutPage";
 import HomePage from "./pages/HomePage";
+import ProductPage from "./pages/ProductPage";
+import DetailPage from "./pages/DetailPage";
 
 function App() {
   return (
@@ -17,8 +19,11 @@ function App() {
           <Route path="/about">
             <AboutPage />
           </Route>
-          <Route path="/users">
-            <AboutPage />
+          <Route path="/product">
+            <ProductPage />
+          </Route>
+          <Route path="/detail">
+            <DetailPage />
           </Route>
         </Switch>
         <Footer />
