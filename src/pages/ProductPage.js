@@ -90,7 +90,7 @@ const ProductPage = () => {
                         />
                       </td>
                       <td>
-                        <Link to="/detail">
+                        <Link to={`/detail/${product.id}/title/${product.title}`}>
                           <BsFillInfoCircleFill />
                         </Link>
                       </td>

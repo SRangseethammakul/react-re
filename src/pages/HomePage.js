@@ -1,21 +1,23 @@
 import React from "react";
 import { BsBarChartFill } from "react-icons/bs";
+import { Link } from "react-router-dom";
 const HomePage = () => {
   return (
     <>
       <div>
         <main role="main">
-          {/* Main jumbotron for a primary marketing message or call to action */}
           <div className="jumbotron">
             <div className="container">
-              <h1 className="display-3">Hello, world!</h1>
+              <h1 className="display-3">Welcome</h1>
               <p>
-                This is a template for a simple marketing or informational
-                website. It includes a large callout called a jumbotron and
-                three supporting pieces of content. Use it as a starting point
-                to create something more unique.
+                Develop with React
               </p>
-              <BsBarChartFill color='red' size='2em'/>
+              <p>
+                <Link to="/product" className="btn btn-primary btn-lg" role="button">
+                  All Product
+                </Link>
+              </p>
+              <BsBarChartFill color="red" size="2em" />
             </div>
           </div>
           <div className="container">
