@@ -6,6 +6,7 @@ import AboutPage from "./pages/AboutPage";
 import HomePage from "./pages/HomePage";
 import ProductPage from "./pages/ProductPage";
 import DetailPage from "./pages/DetailPage";
+import HospitalPage from "./pages/hospital/HospitalPage";
 
 function App() {
   return (
@@ -24,6 +25,9 @@ function App() {
           </Route>
           <Route path="/detail/:id/title/:title">
             <DetailPage />
+          </Route>
+          <Route path="/hospital">
+            <HospitalPage />
           </Route>
         </Switch>
         <Footer />
