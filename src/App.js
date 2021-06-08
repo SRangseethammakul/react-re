@@ -1,5 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { QueryClient, QueryClientProvider } from "react-query";
 import Footer from "./components/Footer";
 import NavBer from "./components/NavBer";
 import AboutPage from "./pages/AboutPage";
@@ -7,10 +8,10 @@ import HomePage from "./pages/HomePage";
 import ProductPage from "./pages/ProductPage";
 import DetailPage from "./pages/DetailPage";
 import HospitalPage from "./pages/hospital/HospitalPage";
-
+const queryClient = new QueryClient();
 function App() {
   return (
-    <>
+    <QueryClientProvider client={queryClient}>
       <Router>
         <NavBer />
         <Switch>
@@ -32,7 +33,7 @@ function App() {
         </Switch>
         <Footer />
       </Router>
-    </>
+    </QueryClientProvider>
   );
 }
 
