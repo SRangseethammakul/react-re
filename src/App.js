@@ -8,6 +8,9 @@ import HomePage from "./pages/HomePage";
 import ProductPage from "./pages/ProductPage";
 import DetailPage from "./pages/DetailPage";
 import HospitalPage from "./pages/hospital/HospitalPage";
+import IndexPage from "./pages/category/IndexPage";
+import CreatePage from "./pages/category/CreatePage";
+import EditPage from "./pages/category/EditPage";
 const queryClient = new QueryClient();
 function App() {
   return (
@@ -29,6 +32,23 @@ function App() {
           </Route>
           <Route path="/hospital">
             <HospitalPage />
+          </Route>
+          <Route 
+          path="/category"
+          render={({match : { url }}) => (
+            <>
+            <Route path={`${url}/`} exact>
+              <IndexPage />
+            </Route>
+            <Route path={`${url}/create`} exact>
+              <CreatePage />
+            </Route>
+            <Route path={`${url}/edit/:id`} exact>
+              <EditPage />
+            </Route>
+            </>
+          )}
+          >
           </Route>
         </Switch>
         <Footer />
