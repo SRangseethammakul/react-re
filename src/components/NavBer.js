@@ -1,15 +1,25 @@
 import React from "react";
-import {
-  Navbar,
-  Nav,
-  Form,
-  FormControl,
-  Button,
-  NavDropdown,
-} from "react-bootstrap";
+import { Navbar, Nav, NavDropdown } from "react-bootstrap";
 import { NavLink, useHistory } from "react-router-dom";
 const NavBer = () => {
   const history = useHistory();
+  const [profile, setProfile] = React.useState(null);
+  const getProfile = () => {
+    const profileValue = JSON.parse(localStorage.getItem("profile"));
+    if (profileValue) {
+      setProfile(profileValue);
+    }
+  };
+  React.useEffect(() => {
+    console.log("use effect navbar");
+    getProfile();
+  }, []);
+  const logout = () => {
+    localStorage.removeItem('token');
+    localStorage.removeItem('profile');
+    history.replace('/');
+    history.go(0);
+  }
   return (
     <>
       <Navbar bg="success" expand="lg" variant="dark">
@@ -42,26 +52,62 @@ const NavBer = () => {
             <NavLink to="/about" className="nav-link" activeClassName="active">
               About
             </NavLink>
-            <NavLink to="/product" className="nav-link" activeClassName="active">
+            <NavLink
+              to="/product"
+              className="nav-link"
+              activeClassName="active"
+            >
               Product
             </NavLink>
             <NavDropdown title="Workshop" id="basic-nav-dropdown">
-              <NavDropdown.Item onClick={() => {
-                history.replace('/hospital')
-              }}>Hospital (Pagination)</NavDropdown.Item>
+              <NavDropdown.Item
+                onClick={() => {
+                  history.replace("/hospital");
+                }}
+              >
+                Hospital (Pagination)
+              </NavDropdown.Item>
               <NavDropdown.Divider />
-              <NavDropdown.Item onClick={() => {
-                history.replace('/category')
-              }}>NEWS (CRUD)</NavDropdown.Item>
+              <NavDropdown.Item
+                onClick={() => {
+                  history.replace("/category");
+                }}
+              >
+                NEWS (CRUD)
+              </NavDropdown.Item>
             </NavDropdown>
             <NavLink to="/upload" className="nav-link" activeClassName="active">
               Upload Image
             </NavLink>
+            <NavLink to="/member" className="nav-link" activeClassName="active">
+              Member
+            </NavLink>
           </Nav>
-          <Form inline>
-            <FormControl type="text" placeholder="Search" className="mr-sm-2" />
-            <Button variant="outline-success">Search</Button>
-          </Form>
+          <Nav>
+            {profile ? (
+              <span className="navbar-text text-white">
+                Welcome {profile.name}, Role: {profile.role}{" "}
+                <button className="btn btn-danger ml-2" onClick={logout}>Log out</button>
+              </span>
+            ) : (
+              <>
+                <NavLink
+                  to="/register"
+                  className="nav-link"
+                  activeClassName="active"
+                >
+                  Register
+                </NavLink>
+                <NavLink
+                  to="/login"
+                  className="nav-link"
+                  activeClassName="active"
+                >
+                  Login
+                </NavLink>
+              </>
+            )}
+          </Nav>
         </Navbar.Collapse>
       </Navbar>
     </>
