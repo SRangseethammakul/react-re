@@ -54,6 +54,9 @@ const NavBer = () => {
                 history.replace('/category')
               }}>NEWS (CRUD)</NavDropdown.Item>
             </NavDropdown>
+            <NavLink to="/upload" className="nav-link" activeClassName="active">
+              Upload Image
+            </NavLink>
           </Nav>
           <Form inline>
             <FormControl type="text" placeholder="Search" className="mr-sm-2" />
