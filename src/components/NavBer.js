@@ -1,25 +1,36 @@
 import React from "react";
 import { Navbar, Nav, NavDropdown } from "react-bootstrap";
 import { NavLink, useHistory } from "react-router-dom";
+import { UserStoreContext } from "../context/UserContext";
 const NavBer = () => {
   const history = useHistory();
-  const [profile, setProfile] = React.useState(null);
+  // const [profile, setProfile] = React.useState(null);
+  const userStore = React.useContext(UserStoreContext);
+  // const getProfile = () => {
+  //   const profileValue = JSON.parse(localStorage.getItem("profile"));
+  //   if (profileValue) {
+  //     setProfile(profileValue);
+  //   }
+  // };
   const getProfile = () => {
     const profileValue = JSON.parse(localStorage.getItem("profile"));
     if (profileValue) {
-      setProfile(profileValue);
+      userStore.updateProfile(profileValue);
+      // setProfile(profileValue);
     }
   };
   React.useEffect(() => {
-    console.log("use effect navbar");
+    // console.log("use effect navbar");
     getProfile();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   const logout = () => {
-    localStorage.removeItem('token');
-    localStorage.removeItem('profile');
-    history.replace('/');
-    history.go(0);
-  }
+    localStorage.removeItem("token");
+    localStorage.removeItem("profile");
+    history.replace("/");
+    // history.go(0);
+    userStore.updateProfile(null);
+  };
   return (
     <>
       <Navbar bg="success" expand="lg" variant="dark">
@@ -84,10 +95,12 @@ const NavBer = () => {
             </NavLink>
           </Nav>
           <Nav>
-            {profile ? (
+            {userStore.profile ? (
               <span className="navbar-text text-white">
-                Welcome {profile.name}, Role: {profile.role}{" "}
-                <button className="btn btn-danger ml-2" onClick={logout}>Log out</button>
+                Welcome {userStore.profile.name}, Role: {userStore.profile.role}{" "}
+                <button className="btn btn-danger ml-2" onClick={logout}>
+                  Log out
+                </button>
               </span>
             ) : (
               <>

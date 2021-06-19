@@ -7,6 +7,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
+import { UserStoreContext } from "../context/UserContext";
 const schema = yup.object().shape({
   email: yup.string().required("email not empty").email("invalid format"),
   password: yup.string().required("password not empty"),
@@ -15,6 +16,7 @@ const schema = yup.object().shape({
 const LoginPage = () => {
   const { addToast } = useToasts();
   const history = useHistory();
+  const userStore = React.useContext(UserStoreContext);
   const {
     register,
     handleSubmit,
@@ -37,15 +39,22 @@ const LoginPage = () => {
           Authorization: "Bearer " + resp.data.access_token,
         },
       });
-      localStorage.setItem("profile", JSON.stringify(respProfile.data.data.user));
+      localStorage.setItem(
+        "profile",
+        JSON.stringify(respProfile.data.data.user)
+      );
 
       addToast("Welcome Back !!!", {
         appearance: "success",
         autoDismiss: true,
         autoDismissTimeout: 3000,
       });
+      // history.replace('/');
+      // history.go(0);
+      //update Profile by Context
+      const profileValue = JSON.parse(localStorage.getItem('profile'))
+      userStore.updateProfile(profileValue);
       history.replace('/');
-      history.go(0);
     } catch (error) {
       addToast(error.response.data.message, {
         appearance: "error",
