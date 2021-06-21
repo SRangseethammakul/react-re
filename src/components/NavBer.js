@@ -1,22 +1,43 @@
 import React from "react";
 import { Navbar, Nav, NavDropdown } from "react-bootstrap";
 import { NavLink, useHistory } from "react-router-dom";
-import { UserStoreContext } from "../context/UserContext";
+// import { UserStoreContext } from "../context/UserContext";
+//redux
+import { useSelector, useDispatch } from "react-redux";
+import { updateProfile } from "../redux/actions/authAction";
 const NavBer = () => {
   const history = useHistory();
+  const dispatch = useDispatch();
   // const [profile, setProfile] = React.useState(null);
-  const userStore = React.useContext(UserStoreContext);
+  // const userStore = React.useContext(UserStoreContext);
+
+  //redux
+  const profileRedux = useSelector((state) => state.authReducer.profile);
+
   // const getProfile = () => {
   //   const profileValue = JSON.parse(localStorage.getItem("profile"));
   //   if (profileValue) {
   //     setProfile(profileValue);
   //   }
   // };
+  // const getProfile = () => {
+  //   const profileValue = JSON.parse(localStorage.getItem("profile"));
+  //   if (profileValue) {
+  //     userStore.updateProfile(profileValue);
+  //     // setProfile(profileValue);
+  //   }
+  // };
+  // React.useEffect(() => {
+  //   // console.log("use effect navbar");
+  //   getProfile();
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, []);
+
+  //redux below
   const getProfile = () => {
     const profileValue = JSON.parse(localStorage.getItem("profile"));
     if (profileValue) {
-      userStore.updateProfile(profileValue);
-      // setProfile(profileValue);
+      dispatch(updateProfile(profileValue));
     }
   };
   React.useEffect(() => {
@@ -24,12 +45,14 @@ const NavBer = () => {
     getProfile();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
   const logout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("profile");
     history.replace("/");
     // history.go(0);
-    userStore.updateProfile(null);
+    dispatch(updateProfile(null));
+    // userStore.updateProfile(null);
   };
   return (
     <>
@@ -95,6 +118,35 @@ const NavBer = () => {
             </NavLink>
           </Nav>
           <Nav>
+            {profileRedux ? (
+              <span className="navbar-text text-white">
+                Welcome {profileRedux.name}, Role: {profileRedux.role}{" "}
+                <button className="btn btn-danger ml-2" onClick={logout}>
+                  Log out
+                </button>
+              </span>
+            ) : (
+              <>
+                <NavLink
+                  to="/register"
+                  className="nav-link"
+                  activeClassName="active"
+                >
+                  Register
+                </NavLink>
+                <NavLink
+                  to="/login"
+                  className="nav-link"
+                  activeClassName="active"
+                >
+                  Login
+                </NavLink>
+              </>
+            )}
+          </Nav>
+
+          {/* use context
+                    <Nav>
             {userStore.profile ? (
               <span className="navbar-text text-white">
                 Welcome {userStore.profile.name}, Role: {userStore.profile.role}{" "}
@@ -121,6 +173,7 @@ const NavBer = () => {
               </>
             )}
           </Nav>
+           */}
         </Navbar.Collapse>
       </Navbar>
     </>

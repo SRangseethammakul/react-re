@@ -18,64 +18,71 @@ import LoginPage from "./pages/LoginPage";
 import MemberPage from "./pages/MemberPage";
 import PrivateRoute from "./guard/auth";
 import UserStoreProvider from "./context/UserContext";
+// redux setup
+import { Provider } from "react-redux";
+import { createStore } from "redux";
+import rootReducer from "./redux/reducers/index";
+const store = createStore(rootReducer);
 const queryClient = new QueryClient();
 function App() {
   return (
-    <UserStoreProvider>
-      <ToastProvider>
-        <QueryClientProvider client={queryClient}>
-          <Router>
-            <NavBer />
-            <Switch>
-              <Route exact path="/">
-                <HomePage />
-              </Route>
-              <Route path="/about">
-                <AboutPage />
-              </Route>
-              <Route path="/product">
-                <ProductPage />
-              </Route>
-              <Route path="/detail/:id/title/:title">
-                <DetailPage />
-              </Route>
-              <Route path="/hospital">
-                <HospitalPage />
-              </Route>
-              <Route path="/upload">
-                <UplodePage />
-              </Route>
-              <Route path="/register">
-                <RegisterPage />
-              </Route>
-              <Route path="/login">
-                <LoginPage />
-              </Route>
-              <PrivateRoute path="/member">
-                <MemberPage />
-              </PrivateRoute>
-              <Route
-                path="/category"
-                render={({ match: { url } }) => (
-                  <>
-                    <Route path={`${url}/`} exact>
-                      <IndexPage />
-                    </Route>
-                    <Route path={`${url}/create`} exact>
-                      <CreatePage />
-                    </Route>
-                    <Route path={`${url}/edit/:id`} exact>
-                      <EditPage />
-                    </Route>
-                  </>
-                )}
-              ></Route>
-            </Switch>
-            <Footer />
-          </Router>
-        </QueryClientProvider>
-      </ToastProvider>
-    </UserStoreProvider>
+    <Provider store={store}>
+      <UserStoreProvider>
+        <ToastProvider>
+          <QueryClientProvider client={queryClient}>
+            <Router>
+              <NavBer />
+              <Switch>
+                <Route exact path="/">
+                  <HomePage />
+                </Route>
+                <Route path="/about">
+                  <AboutPage />
+                </Route>
+                <Route path="/product">
+                  <ProductPage />
+                </Route>
+                <Route path="/detail/:id/title/:title">
+                  <DetailPage />
+                </Route>
+                <Route path="/hospital">
+                  <HospitalPage />
+                </Route>
+                <Route path="/upload">
+                  <UplodePage />
+                </Route>
+                <Route path="/register">
+                  <RegisterPage />
+                </Route>
+                <Route path="/login">
+                  <LoginPage />
+                </Route>
+                <PrivateRoute path="/member">
+                  <MemberPage />
+                </PrivateRoute>
+                <Route
+                  path="/category"
+                  render={({ match: { url } }) => (
+                    <>
+                      <Route path={`${url}/`} exact>
+                        <IndexPage />
+                      </Route>
+                      <Route path={`${url}/create`} exact>
+                        <CreatePage />
+                      </Route>
+                      <Route path={`${url}/edit/:id`} exact>
+                        <EditPage />
+                      </Route>
+                    </>
+                  )}
+                ></Route>
+              </Switch>
+              <Footer />
+            </Router>
+          </QueryClientProvider>
+        </ToastProvider>
+      </UserStoreProvider>
+    </Provider>
   );
 }
 

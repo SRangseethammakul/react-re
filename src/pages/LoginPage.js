@@ -7,7 +7,9 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
-import { UserStoreContext } from "../context/UserContext";
+// import { UserStoreContext } from "../context/UserContext";
+import { useDispatch } from "react-redux";
+import { updateProfile } from "../redux/actions/authAction";
 const schema = yup.object().shape({
   email: yup.string().required("email not empty").email("invalid format"),
   password: yup.string().required("password not empty"),
@@ -16,7 +18,9 @@ const schema = yup.object().shape({
 const LoginPage = () => {
   const { addToast } = useToasts();
   const history = useHistory();
-  const userStore = React.useContext(UserStoreContext);
+  // const userStore = React.useContext(UserStoreContext);
+  //use redux
+  const dispatch = useDispatch();
   const {
     register,
     handleSubmit,
@@ -53,7 +57,9 @@ const LoginPage = () => {
       // history.go(0);
       //update Profile by Context
       const profileValue = JSON.parse(localStorage.getItem('profile'))
-      userStore.updateProfile(profileValue);
+      // userStore.updateProfile(profileValue); //context
+      //call action
+      dispatch(updateProfile(profileValue))
       history.replace('/');
     } catch (error) {
       addToast(error.response.data.message, {
