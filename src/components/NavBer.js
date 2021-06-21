@@ -13,6 +13,7 @@ const NavBer = () => {
 
   //redux
   const profileRedux = useSelector((state) => state.authReducer.profile);
+  const totalRedux = useSelector((state) => state.cartReducer.total);
 
   // const getProfile = () => {
   //   const profileValue = JSON.parse(localStorage.getItem("profile"));
@@ -85,6 +86,9 @@ const NavBer = () => {
             </NavLink>
             <NavLink to="/about" className="nav-link" activeClassName="active">
               About
+            </NavLink>
+            <NavLink to="/cart" className="nav-link" activeClassName="active">
+              Cart {totalRedux} each
             </NavLink>
             <NavLink
               to="/product"

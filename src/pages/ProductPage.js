@@ -5,11 +5,20 @@ import { format } from "date-fns";
 import { th } from "date-fns/locale";
 import { BsFillInfoCircleFill } from "react-icons/bs";
 import { Link } from "react-router-dom";
+
+//redux
+import { addToCart } from "../redux/actions/cartAction";
+import { useSelector, useDispatch } from "react-redux";
 const ProductPage = () => {
   const [products, setProduct] = React.useState([]);
   const [loading, setLoading] = React.useState(false);
   const [error, setError] = React.useState(null);
   const cancelToken = React.useRef(null);
+
+  //redux
+  const dispatch = useDispatch();
+  const cart = useSelector((state) => state.cartReducer.cart);
+  const total = useSelector((state) => state.cartReducer.total);
   const getData = async () => {
     try {
       setLoading(true);
@@ -48,12 +57,26 @@ const ProductPage = () => {
       </div>
     );
   }
+  const addCart = (item) => {
+    // console.log(item);
+    const product = {
+      id : item.id,
+      name : item.title,
+      price : item.view,
+      qty : 1
+    } 
+    //call action
+    dispatch(addToCart(product, cart));
+  }
   return (
     <>
       <div className="container mt-3">
         <div className="row">
           <div className="col-md-12">
             <h2>Product</h2>
+            {
+              total > 0 && <h4>Product Selected : {total}</h4>
+            }
             <Table striped bordered hover>
               <thead>
                 <tr>
@@ -90,9 +113,14 @@ const ProductPage = () => {
                         />
                       </td>
                       <td>
-                        <Link to={`/detail/${product.id}/title/${product.title}`}>
+                        <Link
+                          to={`/detail/${product.id}/title/${product.title}`}
+                        >
                           <BsFillInfoCircleFill />
                         </Link>
+                        <button className="btn btn-outline-success ml-2" onClick={() => addCart(product)}>
+                          Add To Cart
+                        </button>
                       </td>
                     </tr>
                   );

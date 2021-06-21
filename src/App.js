@@ -22,6 +22,7 @@ import UserStoreProvider from "./context/UserContext";
 import { Provider } from "react-redux";
 import { createStore } from "redux";
 import rootReducer from "./redux/reducers/index";
+import CartPage from "./pages/CartPage";
 const store = createStore(rootReducer);
 const queryClient = new QueryClient();
 function App() {
@@ -56,6 +57,9 @@ function App() {
                 </Route>
                 <Route path="/login">
                   <LoginPage />
+                </Route>
+                <Route path="/cart">
+                  <CartPage />
                 </Route>
                 <PrivateRoute path="/member">
                   <MemberPage />
