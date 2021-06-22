@@ -20,10 +20,12 @@ import PrivateRoute from "./guard/auth";
 import UserStoreProvider from "./context/UserContext";
 // redux setup
 import { Provider } from "react-redux";
-import { createStore } from "redux";
-import rootReducer from "./redux/reducers/index";
+// import { createStore } from "redux";
+// import rootReducer from "./redux/reducers/index";
 import CartPage from "./pages/CartPage";
-const store = createStore(rootReducer);
+// const store = createStore(rootReducer); //old dont use persist
+import configureStore from "./redux/configureStore";
+const { store } = configureStore();
 const queryClient = new QueryClient();
 function App() {
   return (
