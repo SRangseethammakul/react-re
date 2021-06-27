@@ -20,6 +20,12 @@ import PrivateRoute from "./guard/auth";
 import UserStoreProvider from "./context/UserContext";
 // redux setup
 import { Provider } from "react-redux";
+
+//thunk
+// import { createStore, applyMiddleware } from 'redux';
+// import thunk from 'redux-thunk';
+// const store = createStore(rootReducer, applyMiddleware(thunk));
+
 // import { createStore } from "redux";
 // import rootReducer from "./redux/reducers/index";
 import CartPage from "./pages/CartPage";
