@@ -1,22 +1,30 @@
 import React from "react";
 import { Table } from "react-bootstrap";
 //redux
-import { useSelector,useDispatch } from "react-redux";
-import {clearAllCart } from '../redux/actions/cartAction'
+import { useSelector, useDispatch } from "react-redux";
+import { clearAllCart } from "../redux/actions/cartAction";
+import { useHistory } from "react-router-dom";
 const CartPage = () => {
   const cart = useSelector((state) => state.cartReducer.cart);
   const total = useSelector((state) => state.cartReducer.total);
+  const history = useHistory();
   const dispatch = useDispatch();
   return (
     <div className="container mt-3">
       <div className="row">
         <div className="col-md-12">
           <h2>Cart Sum {total}</h2>
-          <button className="btn btn-danger btn-sm m-3" onClick={() => {
-            dispatch(clearAllCart());
-          }}>
+          <button
+            className="btn btn-danger btn-sm m-3"
+            onClick={() => {
+              dispatch(clearAllCart());
+            }}
+          >
             Clear Product All
           </button>
+          <button className="btn btn-info btn-sm m-3" onClick={() => {
+            history.push('/pdf')
+          }}>Export PDF</button>
           <Table striped bordered hover>
             <thead>
               <tr>

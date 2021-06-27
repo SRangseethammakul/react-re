@@ -120,6 +120,9 @@ const NavBer = () => {
             <NavLink to="/member" className="nav-link" activeClassName="active">
               Member
             </NavLink>
+            <NavLink to="/chart" className="nav-link" activeClassName="active">
+              Chart
+            </NavLink>
           </Nav>
           <Nav>
             {profileRedux ? (

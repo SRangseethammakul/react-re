@@ -31,6 +31,8 @@ import { Provider } from "react-redux";
 import CartPage from "./pages/CartPage";
 // const store = createStore(rootReducer); //old dont use persist
 import configureStore from "./redux/configureStore";
+import PdfReport from "./pages/report/PdfReport";
+import ChartReport from "./pages/report/ChartReport";
 const { store } = configureStore();
 const queryClient = new QueryClient();
 function App() {
@@ -68,6 +70,12 @@ function App() {
                 </Route>
                 <Route path="/cart">
                   <CartPage />
+                </Route>
+                <Route path="/pdf">
+                  <PdfReport />
+                </Route>
+                <Route path="/chart">
+                  <ChartReport />
                 </Route>
                 <PrivateRoute path="/member">
                   <MemberPage />
